@@ -2,6 +2,7 @@ body {
   margin: 0;
   font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
   padding: 20px 60px;
+  box-sizing: border-box;
 }
 
 code {
@@ -12,4 +13,7 @@ a {
   text-decoration: none;
   color: black;
   font-size: 20px;
+}
+*{
+  box-sizing: border-box;
 }
