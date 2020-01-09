@@ -3,8 +3,8 @@ import "./sign-in.styles.scss";
 import FormInput from "../form-input/form-input";
 import CustomButton from "../../components/custom-button/custom-button.component";
 
-import { signInWithGoogle } from "../../firebase/firebase.utils";
-export default class SignIn extends Component {
+import { auth, signInWithGoogle } from "../../firebase/firebase.utils";
+ class SignIn extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -12,9 +12,15 @@ export default class SignIn extends Component {
       password: ""
     };
   }
-  handleSubmit = e => {
+  handleSubmit = async e => {
     e.preventDefault();
-    this.setState({ email: "", password: "" });
+    const { email, password } = this.state;
+    try {
+      await auth.signInWithEmailAndPassword(email, password);
+      this.setState({ email: "", password: "" });
+    } catch (error) {
+      console.log(error);
+    }
   };
   handleChange = e => {
     const { value, name } = e.target;
@@ -30,7 +36,7 @@ export default class SignIn extends Component {
             <FormInput
               type="email"
               name="email"
-              handleChange={this.handleChange}
+              onChange={this.handleChange}
               value={this.state.email}
               label="Email"
               required
@@ -38,7 +44,7 @@ export default class SignIn extends Component {
             <FormInput
               type="password"
               name="password"
-              handleChange={this.handleChange}
+              onChange={this.handleChange}
               value={this.state.password}
               label="Password"
               required
@@ -47,8 +53,7 @@ export default class SignIn extends Component {
           <div className="button">
             <CustomButton type="submit"> Sign in </CustomButton>
             <CustomButton onClick={signInWithGoogle} isGoogleSignIn>
-              {" "}
-              Sign in With Google{" "}
+              Sign in With Google
             </CustomButton>
           </div>
         </div>
@@ -56,3 +61,4 @@ export default class SignIn extends Component {
     );
   }
 }
+export default SignIn
