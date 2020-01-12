@@ -1,5 +1,5 @@
 import CartActionTypes from './cart.type'
-import Cart from '../../components/cart/cart.component';
+import Cart from '../../components/cart-dropdown/cart-dropdown.component';
 import { addItemToCart } from './cart.utils'
 const INITIAL_STATE = {
    hidden:true,

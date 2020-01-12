@@ -1,16 +1,21 @@
-import React from "react";
-import { connect } from "react-redux";
-import HomePage from "./pages/homepage/homepage.component";
+import React ,{ Component } from "react";
 import { Route, Switch, Redirect } from "react-router-dom";
+// React- Redux
+import HomePage from "./pages/homepage/homepage.component";
 import ShopPage from "./pages/shop/shop.component";
 import SignInAndSignUp from "./pages/sign-in-and-sign-up/sign-in-and-sign-up.component";
 import Header from "./components/header/header.component";
+import CheckoutPage from './pages/checkout/checkout.component'
+// Pages
 import { auth, createUserProfileDocument } from "./firebase/firebase.utils";
+// Firebase
+
 import { setCurrentUser } from "./redux/user/user.action";
+import { connect } from "react-redux";
 import { selectCurrentUser } from "./redux/user/user.selector";
 import {createStructuredSelector} from 'reselect'
-
-class App extends React.Component {
+// Redux
+class App extends Component {
   unsubscribeFromAuth = null;
   componentDidMount() {
     const { setCurrentUser } = this.props;
@@ -39,6 +44,7 @@ class App extends React.Component {
         <Header />
         <Switch>
           <Route exact path="/" component={HomePage} />
+          <Route exact path="/checkout" component={CheckoutPage} />
           <Route path="/shop" component={ShopPage} />
           <Route
             exact

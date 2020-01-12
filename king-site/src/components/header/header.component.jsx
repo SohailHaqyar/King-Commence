@@ -1,6 +1,6 @@
 import React from "react";
 import CartIcon from "../cart-icon/cart-icon.component";
-import Cart from "../cart/cart.component";
+import Cart from "../cart-dropdown/cart-dropdown.component";
 import { selectCartHidden } from '../../redux/cart/cart.selectors'
 import { createStructuredSelector } from 'reselect'
 import { Link } from "react-router-dom";
