@@ -1,58 +1,21 @@
-import React, { Component } from "react";
+import React from "react";
 import MenuItem from "../../menu-item/menu-item.component";
 import "./directory.styles.scss";
+import { connect } from "react-redux";
+import { selectDirectorySections } from '../../redux/directory/directory.selectors';
+import { createStructuredSelector } from 'reselect'
 
-class Directory extends Component {
-  constructor() {
-    super();
-    this.state = {
-      sections: [
-        {
-          title: "hats",
-          imageUrl: "https://i.ibb.co/cvpntL1/hats.png",
-          id: 1,
-          linkUrl:'hats'
+const Directory = ({ sections }) => (
+  <div className="directory-menu">
+    {sections.map(({ id, ...otherSectionProps }) => {
+      return <MenuItem key={id} {...otherSectionProps} />;
+    })}
+  </div>
+);
+const mapStateToProps =createStructuredSelector({
+  sections:selectDirectorySections
+})
 
-        },
-        {
-          title: "jackets",
-          imageUrl: "https://i.ibb.co/px2tCc3/jackets.png",
-          id: 2,
-          linkUrl:''
-        },
-        {
-          title: "sneakers",
-          imageUrl: "https://i.ibb.co/0jqHpnp/sneakers.png",
-          id: 3,
-          linkUrl:''
-        },
-        {
-          title: "womens",
-          size:'large',
-          imageUrl: "https://i.ibb.co/GCCdy8t/womens.png",
-          id: 4,
-          linkUrl:''
-        },
-        {
-          title: "mens",
-          imageUrl: "https://i.ibb.co/R70vBrQ/men.png",
-          size: "large",
-          id: 5,
-          linkUrl:''
-        }
-      ]
-    };
-  }
 
-  render() {
-    return (
-      <div className="directory-menu">
-        {this.state.sections.map(({ id , ...otherSectionProps}) => {
-          return <MenuItem key={id} {...otherSectionProps}/>;
-        })}
-      </div>
-    );
-  }
-}
 
-export default Directory;
+export default connect(mapStateToProps,null)(Directory);
